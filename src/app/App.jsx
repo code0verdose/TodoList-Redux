@@ -8,6 +8,7 @@ import clsx from "clsx";
 import {List} from "../components/List";
 import {ListTop} from "../components/ListTop";
 import {ListItem} from "../components/ListItem";
+import {ListBottom} from "../components/ListBottom/ui/ListBottom";
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -46,6 +47,10 @@ function App() {
               </ListItem>
             ))}
           </List>
+          <ListBottom isActive={!!todos.length}>
+            <Button className={clsx(s.btn, s.btn__del_done)} text='Удалить завершенные'/>
+            <Button className={clsx(s.btn, s.btn__del_all)} text='Удалить все'/>
+          </ListBottom>
         </Wrapper>
       </Layout>
 
