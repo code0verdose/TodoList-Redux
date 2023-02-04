@@ -1,14 +1,11 @@
 import {useState} from "react";
 import {Layout} from "../layout";
-import {Input} from "../components/Input/ui/Input";
-import {Button} from "../components/Button/ui/Button";
 import {Wrapper} from "../components/Wrapper";
-import s from './style.module.sass'
 import clsx from "clsx";
 import {List} from "../components/List";
 import {ListTop} from "../components/ListTop";
-import {ListItem} from "../components/ListItem";
 import {ListBottom} from "../components/ListBottom/ui/ListBottom";
+import './style.sass'
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -61,25 +58,9 @@ function App() {
     <div className="App">
       <Layout>
         <Wrapper>
-          <ListTop>
-            <label>
-              <Input value={value} setValue={setValue}/>
-              <Button className={clsx(s.btn, s.btn__add)} text='Добавить' onClick={addTodo}/>
-            </label>
-          </ListTop>
-          <List className={clsx({[s.list] : todos.length})}>
-            {todos.map(todo => (
-              <ListItem key={todo.id}>
-                <input onChange={() => toggleIsDone(todo.id)} checked={todo.isDone} type="checkbox"/>
-                <span title={todo.text}>{todo.text}</span>
-                <Button onClick={() => removeTodo(todo.id)} text='❌'/>
-              </ListItem>
-            ))}
-          </List>
-          <ListBottom isActive={!!todos.length}>
-            <Button onClick={removeIsDoneTodo} className={clsx(s.btn, s.btn__del_done)} text='Удалить завершенные'/>
-            <Button onClick={removeAllTodo} className={clsx(s.btn, s.btn__del_all)} text='Удалить все'/>
-          </ListBottom>
+          <ListTop value={value} setValue={setValue} addTodo={addTodo}/>
+          <List todos={todos} removeTodo={removeTodo} toggleIsDone={toggleIsDone} className={clsx({['list'] : todos.length})}/>
+          <ListBottom removeAllTodo={removeAllTodo} removeIsDoneTodo={removeIsDoneTodo} isActive={!!todos.length}/>
         </Wrapper>
       </Layout>
 

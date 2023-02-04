@@ -1,11 +1,12 @@
 import React from 'react';
-import s from './List.module.sass'
-import clsx from "clsx";
+import {ListItem} from "../../ListItem";
 
-const List = ({children, className}) => {
+const List = ({className, todos, toggleIsDone, removeTodo}) => {
   return (
     <ul className={className}>
-      {children}
+      {todos.map(todo => (
+        <ListItem key={todo.id} todo={todo} removeTodo={removeTodo} toggleIsDone={toggleIsDone}/>
+      ))}
     </ul>
   );
 };
