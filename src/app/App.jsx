@@ -15,7 +15,7 @@ function App() {
   const [value, setValue] = useState('')
 
   const addTodo = () => {
-    if(value.trim().length) {
+    if (value.trim().length) {
       setTodos([
         ...todos,
         {
@@ -27,6 +27,35 @@ function App() {
     }
     setValue('')
   }
+
+  const removeTodo = (todoId) => {
+    setTodos(todos.filter(todo => todoId !== todo.id))
+  }
+
+  const removeAllTodo = () => {
+    setTodos([])
+  }
+
+  const removeIsDoneTodo = () => {
+    setTodos(todos.filter(todo => !todo.isDone))
+  }
+
+
+  const toggleIsDone = (todoId) => {
+    setTodos(
+      todos.map(
+        todo => {
+          if (todo.id !== todoId) return todo
+
+          return {
+            ...todo,
+            isDone: !todo.isDone
+          }
+        }
+      )
+    )
+  }
+
 
   return (
     <div className="App">
@@ -41,15 +70,15 @@ function App() {
           <List className={clsx({[s.list] : todos.length})}>
             {todos.map(todo => (
               <ListItem key={todo.id}>
-                <input type="checkbox"/>
+                <input onChange={() => toggleIsDone(todo.id)} checked={todo.isDone} type="checkbox"/>
                 <span title={todo.text}>{todo.text}</span>
-                <Button text='❌'/>
+                <Button onClick={() => removeTodo(todo.id)} text='❌'/>
               </ListItem>
             ))}
           </List>
           <ListBottom isActive={!!todos.length}>
-            <Button className={clsx(s.btn, s.btn__del_done)} text='Удалить завершенные'/>
-            <Button className={clsx(s.btn, s.btn__del_all)} text='Удалить все'/>
+            <Button onClick={removeIsDoneTodo} className={clsx(s.btn, s.btn__del_done)} text='Удалить завершенные'/>
+            <Button onClick={removeAllTodo} className={clsx(s.btn, s.btn__del_all)} text='Удалить все'/>
           </ListBottom>
         </Wrapper>
       </Layout>
