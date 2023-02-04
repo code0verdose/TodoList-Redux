@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import clsx from "clsx";
-import s from './Button.module.sass'
+import s from "./Button.module.sass";
 
-const Button = ({text, onClick, className}) => {
+const Button = ({ text, onClick, className }) => {
   return (
     <button onClick={onClick} className={clsx(s.Button, className)}>
       {text}
@@ -10,4 +10,4 @@ const Button = ({text, onClick, className}) => {
   );
 };
 
-export {Button};
+export { Button };
