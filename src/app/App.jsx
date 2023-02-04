@@ -5,7 +5,6 @@ import clsx from "clsx";
 import { List } from "../components/List";
 import { ListTop } from "../components/ListTop";
 import { ListBottom } from "../components/ListBottom/ui/ListBottom";
-import "./style.sass";
 
 function App() {
   const [todos, setTodos] = useState([]);
