@@ -1,16 +1,17 @@
 import React from "react";
 import { ListItem } from "../../ListItem";
+import { useSelector } from "react-redux";
+import s from "./List.module.sass";
 
-const List = ({ className, todos, toggleIsDone, removeTodo }) => {
+const List = () => {
+  const todos = useSelector((state) => state.todos.todos);
+
+  if (!todos.length) return null;
+
   return (
-    <ul className={className}>
+    <ul className={s.List}>
       {todos.map((todo) => (
-        <ListItem
-          key={todo.id}
-          todo={todo}
-          removeTodo={removeTodo}
-          toggleIsDone={toggleIsDone}
-        />
+        <ListItem key={todo.id} {...todo} />
       ))}
     </ul>
   );
